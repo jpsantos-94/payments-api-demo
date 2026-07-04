@@ -1,0 +1,244 @@
+{
+  "info": {
+    "_postman_id": "8d995d02-b0dd-4468-bc55-8999e83d351a",
+    "name": "Payments API Demo",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "47628614"
+  },
+  "item": [
+    {
+      "name": "Customer creation",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "urlencoded",
+          "urlencoded": [
+            {
+              "type": "text",
+              "key": "name",
+              "value": "John Doe"
+            },
+            {
+              "type": "text",
+              "key": "email",
+              "value": "johndoe@dot.me"
+            }
+          ]
+        },
+        "url": {
+          "raw": "https://api.stripe.com/v1/customers",
+          "protocol": "https",
+          "host": [
+            "api",
+            "stripe",
+            "com"
+          ],
+          "path": [
+            "v1",
+            "customers"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Create a successful payment intent",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "urlencoded",
+          "urlencoded": [
+            {
+              "type": "text",
+              "key": "amount",
+              "value": "5000"
+            },
+            {
+              "type": "text",
+              "key": "currency",
+              "value": "eur"
+            },
+            {
+              "type": "text",
+              "key": "payment_method_types[]",
+              "value": "card"
+            },
+            {
+              "type": "text",
+              "key": "payment_method",
+              "value": "pm_card_visa"
+            },
+            {
+              "type": "text",
+              "key": "confirm",
+              "value": "true"
+            }
+          ]
+        },
+        "url": {
+          "raw": "https://api.stripe.com/v1/payment_intents",
+          "protocol": "https",
+          "host": [
+            "api",
+            "stripe",
+            "com"
+          ],
+          "path": [
+            "v1",
+            "payment_intents"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Payment Intent Declined",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "urlencoded",
+          "urlencoded": [
+            {
+              "type": "text",
+              "key": "amount",
+              "value": "2000"
+            },
+            {
+              "type": "text",
+              "key": "currency",
+              "value": "eur"
+            },
+            {
+              "type": "text",
+              "key": "payment_method_types[]",
+              "value": "card"
+            },
+            {
+              "type": "text",
+              "key": "payment_method",
+              "value": "pm_card_chargeDeclined"
+            },
+            {
+              "type": "text",
+              "key": "confirm",
+              "value": "true"
+            }
+          ]
+        },
+        "url": {
+          "raw": "https://api.stripe.com/v1/payment_intents",
+          "protocol": "https",
+          "host": [
+            "api",
+            "stripe",
+            "com"
+          ],
+          "path": [
+            "v1",
+            "payment_intents"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Payment Intent idempotency on retry",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Idempotency-Key",
+            "value": "demo-key-004"
+          }
+        ],
+        "body": {
+          "mode": "urlencoded",
+          "urlencoded": [
+            {
+              "type": "text",
+              "key": "amount",
+              "value": "2000"
+            },
+            {
+              "type": "text",
+              "key": "currency",
+              "value": "eur"
+            },
+            {
+              "type": "text",
+              "key": "payment_method_types[]",
+              "value": "card"
+            },
+            {
+              "type": "text",
+              "key": "payment_method",
+              "value": "pm_card_visa"
+            },
+            {
+              "type": "text",
+              "key": "confirm",
+              "value": "true"
+            }
+          ]
+        },
+        "url": {
+          "raw": "https://api.stripe.com/v1/payment_intents",
+          "protocol": "https",
+          "host": [
+            "api",
+            "stripe",
+            "com"
+          ],
+          "path": [
+            "v1",
+            "payment_intents"
+          ]
+        }
+      },
+      "response": []
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{stripe_key}}",
+        "type": "string"
+      }
+    ]
+  },
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "stripe_key",
+      "value": ""
+    }
+  ]
+}
